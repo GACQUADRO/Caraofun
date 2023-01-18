@@ -4,63 +4,63 @@
       "artiste": "Squeezie",
       "chanson": "Influenceur",
       "image": "https://user-images.githubusercontent.com/73235291/203521478-e82cdd3b-5f00-42cd-8e06-d67f2555f3e0.jpg",
-      "video": 
+      "video": ""
     },
     {
         "id": 2,
         "artiste": "Squeezie",
         "chanson": "Adieu les filles",
         "image": "https://user-images.githubusercontent.com/73235291/203523313-f2107102-e3fd-40b8-9b79-da707f3fed14.jpg",
-        "video": "",
-    }
+        "video": ""
+    },
     {
         "id": 3,
         "artiste": "Georges Brassens",
         "chanson": "Les copains d'abord",
         "image": "https://user-images.githubusercontent.com/73235291/203521016-907f1ab2-e8a9-4e8d-b595-e67dbced5918.jpg",
-        "video": "",
-    }
+        "video": ""
+    },
     {
         "id": 4,
         "artiste": "AC-DC",
         "chanson": "Highway to Hell",
         "image": "https://user-images.githubusercontent.com/73235291/203521156-046dbfe2-83e4-482b-84e7-605f3407653a.jpg",
-        "video": "",
-    }
+        "video": ""
+    },
     {
         "id": 5,
         "artiste": "Michou",
         "chanson": "Poser dans le club",
         "image": "https://user-images.githubusercontent.com/73235291/203521690-f99db3e7-9e35-4d5f-b440-8990dd870fe5.jpg",
-        "video": "",
-    }
+        "video": ""
+    },
     {
         "id": 6,
         "artiste": "ABBA",
         "chanson": "Gimme! Gimme! Gimme",
         "image": "https://user-images.githubusercontent.com/73235291/203522566-ec7fd014-7a61-4ed1-96df-916af7f463e8.jpg",
-        "video": "",
-    }
+        "video": ""
+    },
     {
         "id": 7,
         "artiste": "Beegees",
         "chanson": "Stain' alive",
         "image": "https://user-images.githubusercontent.com/73235291/203522798-3b68c181-24b4-466e-9858-31ff62d7a644.jpg",
-        "video": "",
-    }
+        "video": ""
+    },
     {
         "id": 8,
         "artiste": "Imagine dragons",
         "chanson": "Bones",
         "image": "https://user-images.githubusercontent.com/73235291/203522682-a567cac1-8cbf-4e5a-b432-3d0b62428695.jpg",
-        "video": "",
-    }
+        "video": ""
+    },
     {
-        "id": ,
+        "id":"" ,
         "artiste": "",
         "chanson": "",
         "image": "",
-        "video": "",
+        "video": ""
 
     }
   ]
