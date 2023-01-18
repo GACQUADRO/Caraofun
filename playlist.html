@@ -1,0 +1,31 @@
+<html>
+
+<body>
+    <button type="button">+</button>
+    <div id="output"></div>
+    <script>
+        // 2 tablo un vide et un avec toutes les musiques 
+        // et on bouge d'un list a l'autre
+        var allSongs = [];
+        var myPlaylist = [];
+
+        fetch('./assets/info.json')
+            .then(response => response.json())
+            .then(data => {
+                allSongs = data;
+                console.table(allSongs)
+                var output = document.getElementById("output");
+
+                for (var i = 0; i < allSongs.length - 1; i++) {
+                    output.innerHTML += allSongs[i].artiste + " : " + allSongs[i].chanson + "<br>";
+                    var image = new Image();
+                    image.src = allSongs[i].image;
+                    output.appendChild(image);
+                }
+            });
+
+
+    </script>
+</body>
+
+</html>
