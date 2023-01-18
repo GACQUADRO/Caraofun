@@ -1,8 +1,71 @@
 <html>
 
+<head>
+    <script>
+        var data = [];
+        var dataImg;
+        fetch('./assets/info.json')
+            .then(response => response.json())
+            .then(data => {
+                allSongs = data;
+                console.table(allSongs)
+                var allSongsOutput = document.getElementById("allSongs");
+
+                
+
+                for (var i = 0; i < allSongs.length - 1; i++) {
+                    this.data.push(allSongs[i].artiste + " : " + allSongs[i].chanson);
+
+                    var image = new Image();
+                    image.src = allSongs[i].image;
+                    output.appendChild(image);
+                }
+            });
+        console.log(data);
+
+        var addedData = [];
+
+        function addToAddedData(element) {
+            addedData.push(element);
+            displayAddedData();
+        }
+
+        function displayData() {
+            var dataList = document.getElementById("data-list");
+            for (var i = 0; i < data.length; i++) {
+                var item = document.createElement("li");
+                item.innerHTML = data[i];
+                item.onclick = function () {
+                    addToAddedData(this.innerHTML);
+                };
+                dataList.appendChild(item);
+            }
+        }
+
+        function displayAddedData() {
+            var addedDataList = document.getElementById("added-data-list");
+            addedDataList.innerHTML = "";
+            for (var i = 0; i < addedData.length; i++) {
+                var item = document.createElement("li");
+                item.innerHTML = addedData[i];
+                addedDataList.appendChild(item);
+            }
+        }
+
+        window.onload = displayData;
+    </script>
+</head>
+
 <body>
-    <button type="button">+</button>
+    <h2>All songs:</h2>
+    <ul id="data-list"></ul>
+    <h2>playlist:</h2>
+    <ul id="added-data-list"></ul>
     <div id="output"></div>
+    <!-- ------------------------------------------------------------------------------------------------------------------------------- -->
+    <!-- <button type="button" onclick="AddSong()">+</button>
+    <div id="allSongs"></div>
+    <div id="playlist"></div>
     <script>
         // 2 tablo un vide et un avec toutes les musiques 
         // et on bouge d'un list a l'autre
@@ -14,18 +77,19 @@
             .then(data => {
                 allSongs = data;
                 console.table(allSongs)
-                var output = document.getElementById("output");
+                var allSongsOutput = document.getElementById("allSongs");
 
                 for (var i = 0; i < allSongs.length - 1; i++) {
-                    output.innerHTML += allSongs[i].artiste + " : " + allSongs[i].chanson + "<br>";
-                    var image = new Image();
-                    image.src = allSongs[i].image;
-                    output.appendChild(image);
+                    allSongsOutput.innerHTML += allSongs[i].artiste + " : " + allSongs[i].chanson + "<br>";
                 }
             });
 
-
-    </script>
+        function AddSong(text) {
+            var data = [];
+            data.push(text);
+            document.getElementById("playlist").innerHTML = data.join("<br>");
+        }
+    </script> -->
 </body>
 
 </html>
