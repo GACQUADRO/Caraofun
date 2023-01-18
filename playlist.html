@@ -11,14 +11,14 @@
                 console.table(allSongs)
                 var allSongsOutput = document.getElementById("allSongs");
 
-                
+
 
                 for (var i = 0; i < allSongs.length - 1; i++) {
                     this.data.push(allSongs[i].artiste + " : " + allSongs[i].chanson);
 
-                    var image = new Image();
-                    image.src = allSongs[i].image;
-                    output.appendChild(image);
+                    // var image = new Image();
+                    // image.src = allSongs[i].image;
+                    // output.appendChild(image);
                 }
             });
         console.log(data);
@@ -27,6 +27,12 @@
 
         function addToAddedData(element) {
             addedData.push(element);
+            displayAddedData();
+        }
+
+        function removeFromAddedData(element) {
+            var index = addedData.indexOf(element);
+            addedData.splice(index, 1);
             displayAddedData();
         }
 
@@ -43,14 +49,20 @@
         }
 
         function displayAddedData() {
-            var addedDataList = document.getElementById("added-data-list");
-            addedDataList.innerHTML = "";
-            for (var i = 0; i < addedData.length; i++) {
-                var item = document.createElement("li");
-                item.innerHTML = addedData[i];
-                addedDataList.appendChild(item);
+                var addedDataList = document.getElementById("added-data-list");
+                addedDataList.innerHTML = "";
+                for (var i = 0; i < addedData.length; i++) {
+                    var item = document.createElement("li");
+                    var deleteButton = document.createElement("button");
+                    deleteButton.innerHTML = "Supprimer";
+                    deleteButton.onclick = function() {
+                        removeFromAddedData(item.innerHTML);
+                    };
+                    item.innerHTML = addedData[i];
+                    item.appendChild(deleteButton);
+                    addedDataList.appendChild(item);
+                }
             }
-        }
 
         window.onload = displayData;
     </script>
