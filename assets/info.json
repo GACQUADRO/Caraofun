@@ -17,49 +17,49 @@
     },
     {
         "id": 3,
-        "artiste": "Georges Brassens",
-        "chanson": "Les copains d'abord",
-        "image": "https://user-images.githubusercontent.com/73235291/203521016-907f1ab2-e8a9-4e8d-b595-e67dbced5918.jpg",
+        "artiste": "Trei Degete",
+        "chanson": "Time Time",
+        "image": "https://user-images.githubusercontent.com/73235291/218995237-19711b4b-9160-4c3d-997d-e42d0f5b3f9a.jpg",
         "video": "",
         "genre":"Chanson Francaise"
     },
     {
         "id": 4,
-        "artiste": "AC-DC",
-        "chanson": "Highway to Hell",
-        "image": "https://user-images.githubusercontent.com/73235291/203521156-046dbfe2-83e4-482b-84e7-605f3407653a.jpg",
+        "artiste": "Trei Degete",
+        "chanson": "Spaceship",
+        "image": "https://user-images.githubusercontent.com/73235291/218997174-44a50f30-8d5d-45a0-9495-0a62d5929428.jpg",
         "video": "",
         "genre":"Rock"
     },
     {
         "id": 5,
-        "artiste": "Michou",
-        "chanson": "Poser dans le club",
-        "image": "https://user-images.githubusercontent.com/73235291/203521690-f99db3e7-9e35-4d5f-b440-8990dd870fe5.jpg",
+        "artiste": "ZZCCMXTP",
+        "chanson": "MAMAN",
+        "image": "https://user-images.githubusercontent.com/73235291/218999597-d4c278c1-2d71-4a51-8f8f-24951f7b1b56.jpg",
         "video": "",
         "genre": "Youtubeur"
     },
     {
         "id": 6,
-        "artiste": "ABBA",
-        "chanson": "Gimme! Gimme! Gimme",
-        "image": "https://user-images.githubusercontent.com/73235291/203522566-ec7fd014-7a61-4ed1-96df-916af7f463e8.jpg",
+        "artiste": "ZZCCMXTP",
+        "chanson": "La Vérité",
+        "image": "https://user-images.githubusercontent.com/73235291/219001082-92dcb7ae-d61f-4f59-a01a-3278bb9a21fd.png",
         "video": "",
         "genre": "Pop"
     },
     {
         "id": 7,
-        "artiste": "Beegees",
-        "chanson": "Stain' alive",
-        "image": "https://user-images.githubusercontent.com/73235291/203522798-3b68c181-24b4-466e-9858-31ff62d7a644.jpg",
+        "artiste": "Cyprien Squeezie",
+        "chanson": "ON FAIT LA PAIX ❤️ ",
+        "image": "https://user-images.githubusercontent.com/73235291/219001867-c28ca01c-2dea-455e-86b4-bc5d3aabfe86.jpg",
         "video": "",
         "genre": "Pop"
     },
     {
         "id": 8,
-        "artiste": "Imagine dragons",
-        "chanson": "Bones",
-        "image": "https://user-images.githubusercontent.com/73235291/203522682-a567cac1-8cbf-4e5a-b432-3d0b62428695.jpg",
+        "artiste": "Norman",
+        "chanson": "Luigi clash Mario",
+        "image": "https://user-images.githubusercontent.com/73235291/219002781-7b7021db-1bd3-48e5-bb7e-003a1124fb63.jpg",
         "video": "",
         "genre":"Rock"
     },
