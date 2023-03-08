@@ -8,7 +8,7 @@
             .then(response => response.json())
             .then(data => {
                 allSongs = data;
-                console.table(allSongs)
+                //console.table(allSongs)
                 var allSongsOutput = document.getElementById("allSongs");
 
 
@@ -21,7 +21,7 @@
                     // output.appendChild(image); ඞ…
                 }
             });
-        console.log(data);
+        //console.log(data);
 
         var addedData = [];
 
@@ -61,10 +61,14 @@
                     item.innerHTML = addedData[i];
                     item.appendChild(deleteButton);
                     addedDataList.appendChild(item);
+
+
                 }
             }
 
+        console.table(addedData);
         window.onload = displayData;
+        
     </script>
 </head>
 

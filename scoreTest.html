@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Visualisation de la tonalité de la vidéo</title>
+  </head>
+  <body>
+    <video id="video" src="./assets/mp4/ZZCCMXTP - MAMAN (Clip Officiel) ft Dawn, Pleeg .mp4"></video>
+    <canvas id="canvas" width="500" height="200"></canvas>
+    <script>
+      // On récupère l'élément vidéo et le canvas
+      const video = document.getElementById('video');
+      const canvas = document.getElementById('canvas');
+      const context = canvas.getContext('2d');
+
+      // On initialise l'analyseur audio
+      const audioContext = new AudioContext();
+      const source = audioContext.createMediaElementSource(video);
+      const analyser = audioContext.createAnalyser();
+      analyser.fftSize = 2048;
+      source.connect(analyser);
+      analyser.connect(audioContext.destination);
+
+      // On crée un tableau pour stocker les données audio
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+
+      // On dessine le graphique
+      function draw() {
+        // On récupère la largeur et la hauteur du canvas
+        const width = canvas.width;
+        const height = canvas.height;
+
+        // On efface le canvas
+        context.clearRect(0, 0, width, height);
+
+        // On récupère les données audio
+        analyser.getByteFrequencyData(dataArray);
+
+        // On calcule la moyenne des valeurs
+        let average = 0;
+        for (let i = 0; i < bufferLength; i++) {
+          average += dataArray[i];
+        }
+        average /= bufferLength;
+
+        // On dessine le trait vertical
+        const x = width / 2;
+        const y = height / 2;
+        const amplitude = (average / 255) * (height / 2);
+        context.beginPath();
+        context.moveTo(x, y - amplitude);
+        context.lineTo(x, y + amplitude);
+        context.strokeStyle = 'red';
+        context.stroke();
+
+        // On appelle la fonction de dessin à nouveau
+        requestAnimationFrame(draw);
+      }
+
+      // On démarre la vidéo et le dessin
+      video.play();
+      draw();
+    </script>
+  </body>
+</html>
