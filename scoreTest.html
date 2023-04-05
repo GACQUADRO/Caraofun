@@ -1,66 +1,151 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Visualisation de la tonalité de la vidéo</title>
-  </head>
-  <body>
-    <video id="video" src="./assets/mp4/ZZCCMXTP - MAMAN (Clip Officiel) ft Dawn, Pleeg .mp4"></video>
-    <canvas id="canvas" width="500" height="200"></canvas>
-    <script>
-      // On récupère l'élément vidéo et le canvas
-      const video = document.getElementById('video');
-      const canvas = document.getElementById('canvas');
-      const context = canvas.getContext('2d');
 
-      // On initialise l'analyseur audio
-      const audioContext = new AudioContext();
-      const source = audioContext.createMediaElementSource(video);
-      const analyser = audioContext.createAnalyser();
-      analyser.fftSize = 2048;
-      source.connect(analyser);
-      analyser.connect(audioContext.destination);
+<head>
+  <meta charset="UTF-8">
+  <title>Visualisation de la tonalité de la vidéo</title>
+</head>
 
-      // On crée un tableau pour stocker les données audio
-      const bufferLength = analyser.frequencyBinCount;
-      const dataArray = new Uint8Array(bufferLength);
+<body>
+  <!-- <video id="video" src="./assets/mp4/ZZCCMXTP - MAMAN (Clip Officiel) ft Dawn, Pleeg .mp4"></video> -->
+  <canvas id="canvas" width="500" height="200"></canvas>
+  <canvas id="canvasVoice" width="500" height="200"></canvas>
+  <br>
+  <!-- <div id="score">
+    Score :
+  </div> -->
+  <script>
+    const canvasVoice = document.getElementById('canvasVoice');
+    const contextVoice = canvasVoice.getContext('2d');
 
-      // On dessine le graphique
-      function draw() {
-        // On récupère la largeur et la hauteur du canvas
-        const width = canvas.width;
-        const height = canvas.height;
+    const audioContextVoice = new AudioContext();
+    var analyserVoice;
+    var average;
+    var averageVoice;
+    var score = 0;
 
-        // On efface le canvas
-        context.clearRect(0, 0, width, height);
 
-        // On récupère les données audio
-        analyser.getByteFrequencyData(dataArray);
+    // document.addEventListener('click', () => {
+    audioContextVoice.resume().then(() => {
+      console.log('Playback resumed successfully');
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then((stream) => {
+          const source = audioContextVoice.createMediaStreamSource(stream);
+          analyserVoice = audioContextVoice.createAnalyser();
+          analyserVoice.fftSize = 2048;
+          const bufferLength = analyserVoice.frequencyBinCount;
+          const dataArray = new Uint8Array(bufferLength);
+          source.connect(analyserVoice);
 
-        // On calcule la moyenne des valeurs
-        let average = 0;
-        for (let i = 0; i < bufferLength; i++) {
-          average += dataArray[i];
-        }
-        average /= bufferLength;
+          function drawVoice() {
+            // On récupère la largeur et la hauteur du canvas
+            const width = canvasVoice.width;
+            const height = canvasVoice.height;
 
-        // On dessine le trait vertical
-        const x = width / 2;
-        const y = height / 2;
-        const amplitude = (average / 255) * (height / 2);
-        context.beginPath();
-        context.moveTo(x, y - amplitude);
-        context.lineTo(x, y + amplitude);
-        context.strokeStyle = 'red';
-        context.stroke();
+            // On efface le canvas
+            contextVoice.clearRect(0, 0, width, height);
 
-        // On appelle la fonction de dessin à nouveau
-        requestAnimationFrame(draw);
+            // On récupère les données audio
+            analyserVoice.getByteFrequencyData(dataArray);
+
+            // On calcule la moyenne des valeurs
+            averageVoice = 0;
+            for (let i = 0; i < bufferLength; i++) {
+              averageVoice += dataArray[i];
+            }
+            averageVoice /= bufferLength;
+
+            // On dessine le trait vertical
+            const x = width / 2;
+            const y = height / 2;
+            const amplitude = (averageVoice / 255) * (height / 2);
+            contextVoice.beginPath();
+            contextVoice.moveTo(x, y - amplitude);
+            contextVoice.lineTo(x, y + amplitude);
+            contextVoice.strokeStyle = 'red';
+            contextVoice.stroke();
+
+            // On appelle la fonction de dessin à nouveau
+            requestAnimationFrame(drawVoice);
+          }
+
+          drawVoice();
+        })
+        .catch((error) => {
+          console.error('getUserMedia error:', error);
+        });
+    });
+    // });
+
+
+    // On récupère l'élément vidéo et le canvas
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const context = canvas.getContext('2d');
+
+    // On initialise l'analyseur audio
+    const audioContext = new AudioContext();
+    const source = audioContext.createMediaElementSource(video);
+    const analyser = audioContext.createAnalyser();
+    analyser.fftSize = 2048;
+    source.connect(analyser);
+    analyser.connect(audioContext.destination);
+
+    // On crée un tableau pour stocker les données audio
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    // On dessine le graphique
+    function draw() {
+      // On récupère la largeur et la hauteur du canvas
+      const width = canvas.width;
+      const height = canvas.height;
+
+      // On efface le canvas
+      context.clearRect(0, 0, width, height);
+
+      // On récupère les données audio
+      analyser.getByteFrequencyData(dataArray);
+
+      // On calcule la moyenne des valeurs
+      average = 0;
+      for (let i = 0; i < bufferLength; i++) {
+        average += dataArray[i];
       }
+      average /= bufferLength;
 
-      // On démarre la vidéo et le dessin
-      video.play();
-      draw();
-    </script>
-  </body>
+      // On dessine le trait vertical
+      const x = width / 2;
+      const y = height / 2;
+      const amplitude = (average / 255) * (height / 2);
+      context.beginPath();
+      context.moveTo(x, y - amplitude);
+      context.lineTo(x, y + amplitude);
+      context.strokeStyle = 'red';
+      context.stroke();
+
+      // On appelle la fonction de dessin à nouveau
+      requestAnimationFrame(draw);
+    }
+
+    function compareTest() {
+      if (average + 2 > averageVoice && average - 2 < averageVoice && average != 0) {
+        console.log("Hey");
+        score += 100;
+
+
+      }
+      document.getElementById("score").innerHTML = score;
+    }
+
+    setInterval(compareTest, 100);
+
+    // On démarre la vidéo et le dessin
+    video.play();
+    draw();
+
+
+  </script>
+</body>
+
 </html>

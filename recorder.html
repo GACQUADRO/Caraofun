@@ -1,50 +1,73 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Visualisation de la tonalité de la voix</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body>
-    <canvas id="canvas" width="500" height="200"></canvas>
-    <script>
-      const canvas = document.getElementById('canvas');
-      const context = canvas.getContext('2d');
 
-      const audioContext = new AudioContext();
-      let analyser;
+<head>
+  <title>Visualisation de la tonalité de la voix</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-      document.addEventListener('click', () => {
-        audioContext.resume().then(() => {
-          console.log('Playback resumed successfully');
-          navigator.mediaDevices.getUserMedia({ audio: true })
-            .then((stream) => {
-              const source = audioContext.createMediaStreamSource(stream);
-              analyser = audioContext.createAnalyser();
-              analyser.fftSize = 2048;
-              const bufferLength = analyser.frequencyBinCount;
-              const dataArray = new Uint8Array(bufferLength);
-              source.connect(analyser);
+<body>
+  <canvas id="canvasVoice" width="500" height="200"></canvas>
+  <script>
+    const canvasVoice = document.getElementById('canvasVoice');
+    const contextVoice = canvasVoice.getContext('2d');
 
-              function draw() {
-                requestAnimationFrame(draw);
-                analyser.getByteFrequencyData(dataArray);
-                const average = dataArray.reduce((acc, val) => acc + val) / bufferLength;
-                const y = canvas.height - average / 256 * canvas.height;
-                context.clearRect(0, 0, canvas.width, canvas.height);
-                context.beginPath();
-                context.moveTo(0, y);
-                context.lineTo(canvas.width, y);
-                context.stroke();
+    const audioContextVoice = new AudioContext();
+    let analyser;
+
+    // document.addEventListener('click', () => {
+      audioContextVoice.resume().then(() => {
+        console.log('Playback resumed successfully');
+        navigator.mediaDevices.getUserMedia({ audio: true })
+          .then((stream) => {
+            const source = audioContextVoice.createMediaStreamSource(stream);
+            analyser = audioContextVoice.createAnalyser();
+            analyser.fftSize = 2048;
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            source.connect(analyser);
+
+            function drawVoice() {
+              // On récupère la largeur et la hauteur du canvas
+              const width = canvasVoice.width;
+              const height = canvasVoice.height;
+
+              // On efface le canvas
+              contextVoice.clearRect(0, 0, width, height);
+
+              // On récupère les données audio
+              analyser.getByteFrequencyData(dataArray);
+
+              // On calcule la moyenne des valeurs
+              let average = 0;
+              for (let i = 0; i < bufferLength; i++) {
+                average += dataArray[i];
               }
+              average /= bufferLength;
 
-              draw();
-            })
-            .catch((error) => {
-              console.error('getUserMedia error:', error);
-            });
-        });
+              // On dessine le trait vertical
+              const x = width / 2;
+              const y = height / 2;
+              const amplitude = (average / 255) * (height / 2);
+              contextVoice.beginPath();
+              contextVoice.moveTo(x, y - amplitude);
+              contextVoice.lineTo(x, y + amplitude);
+              contextVoice.strokeStyle = 'red';
+              contextVoice.stroke();
+
+              // On appelle la fonction de dessin à nouveau
+              requestAnimationFrame(drawVoice);
+            }
+
+            drawVoice();
+          })
+          .catch((error) => {
+            console.error('getUserMedia error:', error);
+          });
       });
-    </script>
-  </body>
+    // });
+  </script>
+</body>
+
 </html>
